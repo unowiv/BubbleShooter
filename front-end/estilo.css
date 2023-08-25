@@ -1,0 +1,20 @@
+body{
+    text-align:center;
+    color:white;
+    background-color: black;
+} 
+table{
+    width:100%;
+    margin-bottom:5em;
+    table-layout:fixed;
+    text-align:center;
+  }
+  
+@font-face {
+        font-family:"game_over";
+        src: url(./fonts/game_over.ttf);
+}
+.App{
+    font-family: "game_over";
+  }
+
