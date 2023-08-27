@@ -5,7 +5,6 @@ from objs.grid_file import *
 from objs.shooter_file import *
 from objs.game_objects import *
 
-#from menuprincipal import *
 import pygame as pg
 import os
 pg.init()
@@ -16,7 +15,7 @@ def main():
 	# Criação background
 	background = Background()
 
-	# Initialize gun, position at bottom center of the screen
+	# Inicialize a arma, posicione na parte inferior central da tela
 	gun = Shooter(pos = BOTTOM_CENTER)
 	gun.putInBox()	
 
@@ -24,41 +23,40 @@ def main():
 	game = Game()	
 	cheat_manager = CheatManager(grid_manager, gun)
 
-	# Starting mouse position
+	# Iniciando a posição do mouse
 	mouse_pos = (DISP_W/2, DISP_H/2)
 	
-	# pretty self-explanatory
 	while not game.over:		
 
-		# quit when you press the x
+	# sai quando você pressiona x
 		for event in pg.event.get():
 			if event.type == pg.QUIT:
 				pg.quit()
 				quit()
 
-			# get mouse position
+			#posição do mouse
 			if event.type == pg.MOUSEMOTION: mouse_pos = pg.mouse.get_pos()
 				
-			# if you click, fire a bullet
+			# se você clicar, dispara uma bala
 			if event.type == pg.MOUSEBUTTONDOWN: gun.fire()
 			
 			if event.type == pg.KEYDOWN:
-				cheat_manager.view(event) # if a key is pressed, the cheat manager should know about it
+				cheat_manager.view(event) 
 
-				# Ctrl+C to quit
+				# Ctrl+C para sair
 				if event.key == pg.K_c and pg.key.get_mods() & pg.KMOD_CTRL:
 					pg.quit()
 					quit()
 
 		
-		background.draw()				# Draw BG first		
+		background.draw()				# Desenhe BG primeiro
 
-		grid_manager.view(gun, game)	# Check collision with bullet and update grid as needed		
+		grid_manager.view(gun, game)	# Verifique a colisão com o marcador e atualize a grade conforme necessário	
 
-		gun.rotate(mouse_pos)			# Rotate the gun if the mouse is moved		
-		gun.draw_bullets()				# Draw and update bullet and reloads	
-
-		game.drawScore()				# draw score
+		gun.rotate(mouse_pos)			#Gire a arma se o mouse for movido
+		gun.draw_bullets()			# Desenhe e atualize marcadores e recarregue
+		
+		game.drawScore()				# pontuação do empate
 
 		pg.display.update()		
 		clock.tick(60)					# 60 FPS
