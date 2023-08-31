@@ -43,11 +43,10 @@ AIM_LENGTH = 200
 ANGLE_MAX = 180 - 15
 ANGLE_MIN = 15
 
-# MOvementos Balões Constantes  
+# Movementos Balões Constantes  
 BUBBLE_VEL = 15
 BUBBLE_RADIUS = 15
 
-# Grid Constants
 GRID_COLS = 20
 GRID_ROWS = 10
 GAMEOVER_ROWS = 20
@@ -55,16 +54,12 @@ GAMEOVER_ROWS = 20
 
 HITBOX_SIZE = (BUBBLE_RADIUS * 2) - 4
 
-
-
-#Game environment constants
 WALL_WIDTH = 120
 FLOOR_HEIGHT = DISP_H - (2 * BUBBLE_RADIUS * (GAMEOVER_ROWS - 1))
 ROOM_WIDTH = DISP_W - (2 * WALL_WIDTH)
 WALL_BOUND_L = WALL_WIDTH
 WALL_BOUND_R = DISP_W - WALL_WIDTH
 WALL_BOUND_FLOOR = DISP_H - FLOOR_HEIGHT
-# WALL_RECT_L = pg.Rect(0,0,WALL_WIDTH,DISP_H)
-# WALL_RECT_R = pg.Rect(WALL_BOUND_R,0,WALL_WIDTH,DISP_H)
+
 
 URL = "http://localhost:5000/incluir/Jogador"

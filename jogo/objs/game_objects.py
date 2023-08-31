@@ -41,7 +41,7 @@ class Game():
 				if event.type == pg.KEYDOWN:
 
 					if chr(event.key) == 'i':
-						return
+						return 
 
 					if chr(event.key) == "s":
 						dados = {"score": self.score}
@@ -99,7 +99,6 @@ class Background():
 
 
 	def getImage(self):
-		# Imagem de fundo
 		bg = pg.image.load('jogo/images/bg.png').convert()
 		_, _, bg_w, bg_h = bg.get_rect()
 		sf = 0.8
@@ -198,6 +197,7 @@ class CheatManager():
 			else: machine.set('begin')
 
 			return
+
 
 	def blue(self): self.gun.loaded.color = BLUE
 	def red(self): self.gun.loaded.color = RED
