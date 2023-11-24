@@ -109,6 +109,7 @@ class Background():
 
 
 	def draw(self):
+		display.fill("black")
 		display.blit(self.image, (0,0))
 
 		pg.draw.line(display, BLUE, (WALL_BOUND_L, 0), (WALL_BOUND_L, DISP_H))

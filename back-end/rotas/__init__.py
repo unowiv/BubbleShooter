@@ -1,1 +1,1 @@
-__all__ = ["listar", "incluir"]
+__all__ = ["listar", "incluir", "salvar"]
