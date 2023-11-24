@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="Autor" content="Isabelli:)"/>
+    <meta name="description" content="Alterar Background"/>
+
+    <title>Salvar Background</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    
+</head>
+<style>
+    @font-face{
+        font-family: "game";
+        src: url("/front-end/game_over.ttf") format("truetype");
+}
+</style>
+<body>
+    
+    <form onsubmit="return false;" id="formulario">
+        <div id="item">
+            <h1>Alterar fundo</h1>
+
+            <br>
+
+            <figure>
+                <img src="http://localhost:5000/imagem_atual" alt="Background do jogo">
+                <figcaption>Imagem atual</figcaption>
+            </figure>
+
+            <label for="imagem">Imagem: </label>
+                <input type="file" id="imagem" name="imagem">
+
+            <br>
+            
+            <button id="enviar" >Alterar background</button>
+        </div>
+    </form>
+
+    <script src="scriptsalvar.js"></script>
+</body>
+</html>
