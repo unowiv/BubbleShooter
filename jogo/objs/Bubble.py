@@ -30,6 +30,7 @@ class Bubble():
 
 		x, y = int(self.pos[0]), int(self.pos[1])
 
+		# pg.draw.circle(display, self.color, (x,y), self.radius)
 
 		pg.gfxdraw.filled_circle(display, x, y, BUBBLE_RADIUS, self.color)
 

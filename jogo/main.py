@@ -10,13 +10,12 @@ import pygame as pg
 import os
 pg.init()
 
-
 def main():
 
 	# Criação background
 	background = Background()
 
-	# Initialize gun, position at bottom center of the screen
+	# Inicia a gun
 	gun = Shooter(pos = BOTTOM_CENTER)
 	gun.putInBox()	
 
@@ -24,44 +23,42 @@ def main():
 	game = Game()	
 	cheat_manager = CheatManager(grid_manager, gun)
 
-	# Starting mouse position
+	# Começando posição mouse
 	mouse_pos = (DISP_W/2, DISP_H/2)
 	
-	# pretty self-explanatory
 	while not game.over:		
 
-		# quit when you press the x
+		# Sai quando pressionar 
 		for event in pg.event.get():
 			if event.type == pg.QUIT:
 				pg.quit()
 				quit()
 
-			# get mouse position
+		
 			if event.type == pg.MOUSEMOTION: mouse_pos = pg.mouse.get_pos()
-				
-			# if you click, fire a bullet
+
 			if event.type == pg.MOUSEBUTTONDOWN: gun.fire()
 			
 			if event.type == pg.KEYDOWN:
-				cheat_manager.view(event) # if a key is pressed, the cheat manager should know about it
+				cheat_manager.view(event) 
 
-				# Ctrl+C to quit
+				# Ctrl+C para sair
 				if event.key == pg.K_c and pg.key.get_mods() & pg.KMOD_CTRL:
 					pg.quit()
 					quit()
 
 		
-		background.draw()				# Draw BG first		
+		background.draw()				# Desenha Backgorund	
 
 		grid_manager.view(gun, game)	# Check collision with bullet and update grid as needed		
 
-		gun.rotate(mouse_pos)			# Rotate the gun if the mouse is moved		
-		gun.draw_bullets()				# Draw and update bullet and reloads	
+		gun.rotate(mouse_pos)			# Rotação da gun	
+		gun.draw_bullets()				# Desenha e atualiza as bolinhas	
 
-		game.drawScore()				# draw score
+		game.drawScore()				# Desenha o score na tela
 
 		pg.display.update()		
-		clock.tick(60)					# 60 FPS
+		clock.tick(60)					#Seta FPS
 
 	game.gameOverScreen(grid_manager, background)
 

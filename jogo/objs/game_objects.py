@@ -24,7 +24,6 @@ class Game():
 
 		self.salvar_msg = self.font.render('Press S to save in database', False, BLACK)
 		self.salvar_msg_x, self.salvar_msg_y, _, _ = self.salvar_msg.get_rect(center = DISP_CENTER)
-		# Surface((width, height), flags=0, depth=0, masks=None) -> Surface
 
 
 	def gameOverScreen(self, grid_manager, background):
@@ -42,7 +41,7 @@ class Game():
 				if event.type == pg.KEYDOWN:
 
 					if chr(event.key) == 'i':
-						return
+						return 
 
 					if chr(event.key) == "s":
 						dados = {"score": self.score}
@@ -100,7 +99,6 @@ class Background():
 
 
 	def getImage(self):
-		# Load and draw background image
 		bg = pg.image.load('jogo/images/bg.png').convert()
 		_, _, bg_w, bg_h = bg.get_rect()
 		sf = 0.8
@@ -134,7 +132,6 @@ class StateMachine():
 		if state not in self.states: raise ValueError('{} not a valid state'.format(state))
 		else: self.state = state
 
-		# print('State set to', self.state)
 
 	def get_state(self):
 		return self.state
@@ -148,7 +145,6 @@ class CheatManager():
 		self.grid_manager = grid_manager
 		self.gun = gun 
 
-		#----------------------------------- Put you cheat codes here --------------------------------#
 		self.cheats = ['god', 'explosion', 'blue', 'violet', 'green', 'yellow', 'red']
 		self.machines = [StateMachine() for cheat in self.cheats]
 
@@ -189,7 +185,6 @@ class CheatManager():
 				for machine in self.machines:
 					machine.set('begin')
 
-				#-------------------------------- Put cheat functions here --------------------------#
 				if cheat == 'god': self.god_cheat()
 				elif cheat == 'explosion': self.explosion_cheat()
 				elif cheat == 'red': self.red()
@@ -199,13 +194,11 @@ class CheatManager():
 				elif cheat == 'violet': self.violet()
 
 				else: raise ValueError('Cheat function for \'{}\' not called'.format(cheat))
-				#------------------------------------------------------------------------------------#
 
 			else: machine.set('begin')
 
 			return
 
-	#-------------------------------------------------- Put what the cheat function do here -------------------------- #
 
 	def blue(self): self.gun.loaded.color = BLUE
 	def red(self): self.gun.loaded.color = RED

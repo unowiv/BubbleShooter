@@ -7,45 +7,42 @@ import pygame as pg
 class GridManager():
 
 	def __init__(self):
-		self.rows = GRID_ROWS		
-		self.cols = GRID_COLS		
-		self.even_offset = True		
+		self.rows = GRID_ROWS		# Iniciando o rows 
+		self.cols = GRID_COLS		# Iniciando o  cols
+		self.even_offset = True	
 
-	
+	# isso conterá as bolhas que serão verificadas quanto a colisões
 		self.targets = []			
 		
-		
+	# Inicialize a grade
 		self.grid = [[0 for col in range(self.cols)] for row in range(self.rows)]
 
-		
+	# Coloque bolhas na grade		
 		for row in range(self.rows):
 			for col in range(self.cols):
-		
+	# Calcule a posição das bolhas que estarão na grade
 				pos = GridManager.calcPos(row, col, self.even_offset)
 
-		
-				self.grid[row][col] = GridBubble(row, col, pos)
+	# Crie as bolhas da grade. Nota: A cor da bolha é aleatória por padrão
+		self.grid[row][col] = GridBubble(row, col, pos)
 
-		
+	# encontre o vizinho de cada bolha
 		for row in range(self.rows):
 			for col in range(self.cols):
 				self.findComrades(self.grid[row][col])
 
-		
+	# Adicione uma linha de bolhas em branco. A bala tomará o lugar de uma dessas bolhas
 		self.appendBottom()			
-		self.findTargets()			
-		self.collided = False		
-		self.collision_counter = 0	
-		self.animations = []		
-		self.paths = []				
-		self.prev_time = 0			
+		self.findTargets()			# Encontre os alvos que serão verificados quanto a colisões
+		self.collided = False			# Ainda não houve colisões
+		self.collision_counter = 0		# Quantas colisões ocorreram. Usado para determinar quando adicionar uma nova linha ao topo
+		self.animations = []			# A lista de animações para o efeito de queda de bolhas
+		self.paths = []				# A lista de animações para o efeito de pesquisa raiz (linhas) quando as visualizações estão ativadas
+		self.prev_time = 0			# usado para animação de caminhos
 
-	
-	def view(self, gun, game):
+		def view(self, gun, game):
 
-		
 		if gun.fired.exists: self.checkCollision(gun.fired)
-		
 		
 		if self.collided: 
 			self.collision_counter += 1
@@ -56,16 +53,13 @@ class GridManager():
 			self.checkGameOver(game)
 			self.collided = False
 
-		
-		
 		self.draw()
 
-	
-	def checkGameOver(self, game):
-
+	# Simplesmente verifica se o jogo acabou
+		def checkGameOver(self, game):
 
 		if self.rows < GAMEOVER_ROWS: return
-
+			
 		for col in range(self.cols):
 			if self.grid[GAMEOVER_ROWS - 1][col].exists:
 				game.over = True
@@ -75,11 +69,9 @@ class GridManager():
 	def checkCollision(self, bullet):
 
 
-
 		bullet_x, bullet_y = bullet.pos
 		bullet_x += 0.5*bullet.dx
 		bullet_y += 0.5*bullet.dy
-
 
 		for target in self.targets:
 			target_x, target_y = target.pos
@@ -96,7 +88,6 @@ class GridManager():
 
 							bullet.exists = False
 
-
 							self.collided = True
 
 
@@ -109,15 +100,14 @@ class GridManager():
 		collide_point = bullet.pos
 
 		imaginary = []	
-		dists = []		
+		dists = []
 
-		
 		for row in range(self.rows):
 			for col in range(self.cols):
 				if not self.grid[row][col].exists:
 					imaginary.append(self.grid[row][col])
 
-		
+
 		for bubble in imaginary:
 			x,y = collide_point
 			bubble_x, bubble_y = bubble.pos
@@ -125,14 +115,12 @@ class GridManager():
 			dist = sqrt( (((x - bubble_x) ** 2) + (y - bubble_y) ** 2) )
 			dists.append(dist)
 
-		
 		idx = dists.index(min(dists))
-	
+
 		replacement = imaginary[idx]
 
-	
 		replacement.exists = True
-	
+
 		replacement.color = bullet.color
 
 		return replacement
@@ -140,7 +128,7 @@ class GridManager():
 	def updateRows(self):
 
 		if (self.collision_counter % APPEND_COUNTDOWN == 0) and (self.collision_counter != 0): self.appendTop()
-
+			
 		for col in range(self.cols):
 			if self.grid[self.rows-1][col].exists:
 				self.appendBottom()
@@ -178,6 +166,7 @@ class GridManager():
 		row = []
 
 		for col in range(self.cols):
+
 			pos = GridManager.calcPos(self.rows, col, self.even_offset)
 			row.append(GridBubble(self.rows, col, pos, exists = False, color = BG_COLOR))
 
@@ -190,7 +179,7 @@ class GridManager():
 				self.findComrades(self.grid[row][col])
 
 	def deleteBottom(self):
-		self.grid.pop()	
+		self.grid.pop()
 		self.rows -= 1	
 
 		for col in range(self.cols):
@@ -310,6 +299,7 @@ class GridManager():
 						if (comrade not in self.targets) and comrade.exists:
 							self.targets.append(comrade)
 
+		# for target in self.targets: print('row, col = {}, {}'.format(target.row, target.col))
 
 	@staticmethod
 	def calcPos(row, col, even_offset):
@@ -357,6 +347,7 @@ class GridManager():
 		if SHOW_TARGETS or VISUALIZATIONS:
 			for target in self.targets:
 				x, y = int(target.pos[0]), int(target.pos[1])
+
 				pg.draw.circle(display, BLACK, (x,y), 5)
 
 		if SHOW_HITBOXES or VISUALIZATIONS:
