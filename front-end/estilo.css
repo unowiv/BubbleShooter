@@ -8,7 +8,7 @@ body{
     background-color: black;
 }
 
-#item{
+#item {
   text-align: center;
 }
 
@@ -27,10 +27,11 @@ body{
 
 #item #refresh{
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 button{
-  font-size: 10px;
+  font-size: 15px;
 }
 
 img{
@@ -47,4 +48,10 @@ figure {
 
 #enviar{
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+a {
+  color: white;
+  font-size: 10px;
 }
