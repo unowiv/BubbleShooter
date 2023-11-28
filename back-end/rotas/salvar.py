@@ -5,7 +5,7 @@ from config import *
 def salvar():
 
     try:
-        imagem = request.files["files"]
+        imagem = request.files["imagem"]
         caminho_salvar = os.path.join(pastaimagens, 'bg.png')
         imagem.save(caminho_salvar)
         resposta = jsonify({"resultado":"ok", "detalhes": "Imagem salva"})

@@ -56,8 +56,6 @@ class GridManager():
 			self.checkGameOver(game)
 			self.collided = False
 
-		
-		
 		self.draw()
 
 	

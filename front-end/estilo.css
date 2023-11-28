@@ -8,7 +8,7 @@ body{
     background-color: black;
 }
 
-#item {
+#item, #formulario{
   text-align: center;
 }
 

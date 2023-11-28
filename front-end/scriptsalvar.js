@@ -2,9 +2,8 @@ $(function () {
 
     $(document).on("click", "#enviar", function () {
 
-        var imagem = document.getElementById("imagem").value;
+        var imagem = new FormData($('#formulario')[0]);
 
-        console.log(imagem)
         $.ajax({
             url: 'http://localhost:5000/salvar',
             method: 'POST',
